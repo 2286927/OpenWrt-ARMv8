@@ -1,5 +1,5 @@
 * #### Telegram：[频道](https://t.me/OpenWrt_Yuan) | [群组](https://t.me/passwall2)
-* #### 固件下载：https://github.com/yunxi993/OpenWrt-ARMv8/releases
+* #### 固件下载：https://github.com/2286927/OpenWrt-ARMv8/releases
 * #### 默认IP：192.168.1.1
 * #### 默认密码:password
 #
