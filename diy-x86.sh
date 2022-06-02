@@ -11,7 +11,7 @@
 #
 
 # Modify default IP
-sed -i 's/192.168.1.1/172.22.22.5/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/7.1.1.1/g' package/base-files/files/bin/config_generate
 
 # Hostname
 sed -i 's/OpenWrt/OpenWrt-D2550/g' package/base-files/files/bin/config_generate
