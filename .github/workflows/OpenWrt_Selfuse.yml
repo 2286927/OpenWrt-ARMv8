@@ -191,7 +191,7 @@ jobs:
         PACKAGE_SOC: s912
         KERNEL_AUTO_LATEST:  true
         KERNEL_VERSION_NAME: 5.4_5.15_5.19
-        WHOAMI: Yuan
+        WHOAMI: 洲·Cy
         ENABLE_WIFI_K504: 0
         ENABLE_WIFI_K510: 0
         SW_FLOWOFFLOAD: 0
