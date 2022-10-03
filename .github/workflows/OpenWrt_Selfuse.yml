@@ -184,12 +184,13 @@ jobs:
         files: ${{ env.FIRMWARE }}/*
 
     - name: Package Armvirt as OpenWrt
-      uses: unifreq/openwrt_packit@master
+      #uses: unifreq/openwrt_packit@master
+      uses: ophub/flippy-openwrt-actions@main
       env:
         OPENWRT_ARMVIRT: openwrt/bin/targets/*/*/*.tar.gz
         PACKAGE_SOC: s912
         KERNEL_AUTO_LATEST:  true
-        KERNEL_VERSION_NAME: 5.4_5.15_5.18_5.19
+        KERNEL_VERSION_NAME: 5.4_5.15_5.19
         WHOAMI: Yuan
         ENABLE_WIFI_K504: 0
         ENABLE_WIFI_K510: 0
