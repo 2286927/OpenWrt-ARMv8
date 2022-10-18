@@ -69,6 +69,7 @@ jobs:
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
+        
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
@@ -171,6 +172,7 @@ jobs:
           * ARMv8是精简固件.
           * 默认IP: 192.168.1.1
           * 默认密码: password
+          
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
       with:
