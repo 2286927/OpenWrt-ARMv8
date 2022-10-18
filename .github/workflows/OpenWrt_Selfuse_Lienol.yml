@@ -24,7 +24,7 @@ on:
 env:
   REPO_URL: https://github.com/Lienol/openwrt
   REPO_BRANCH: 21.02
-  FEEDS_CONF: feeds.conf.default
+  FEEDS_CONF: feeds/Lienolfeeds.conf.default
   CONFIG_FILE: MenuConfig/OpenWrt_Selfuse-Lienol.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-Selfuse.sh
@@ -69,7 +69,7 @@ jobs:
 
     - name: Load custom feeds
       run: |
-        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
+        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/Lienolfeeds.conf.default
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
