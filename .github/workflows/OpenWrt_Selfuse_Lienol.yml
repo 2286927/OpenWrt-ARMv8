@@ -198,7 +198,10 @@ jobs:
     - name: copy update files
       run: |
         cd /opt/openwrt_packit
-        sudo cp ./files/update*.sh ./output/
+        cp ./files/update*.sh ./output/
+        rm -rf $(find ./output/ -name "sha256sums")
+        cd $GITHUB_WORKSPACE/openwrt/bin
+        cp IPK.tar.gz /opt/openwrt_packit/output/
         echo "::setOutput name=status::success"
         
     - name: Upload OpenWrt Firmware to Release
