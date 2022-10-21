@@ -205,7 +205,8 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         name: OpenWrt_Selfuse_Lienol ${{ env.PRODUCT_NAME }}${{ env.DATE }}
-        tag: OpenWrt_Selfuse_Lienol${{ env.FILE_NAME }}
+        #tag: OpenWrt_Selfuse_Lienol${{ env.FILE_NAME }}
+        tag: ${{ env.TAG_DATE }}
         artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
         allowUpdates: true
         removeArtifacts: true
