@@ -188,12 +188,12 @@ jobs:
         WHOAMI: 洲·Cy
         ENABLE_WIFI_K504: 0
         ENABLE_WIFI_K510: 0
-        SW_FLOWOFFLOAD: 0
+        SW_FLOWOFFLOAD: 1
         HW_FLOWOFFLOAD: 0
         SFE_FLOW: 0
-        SELECT_PACKITPATH: openwrt_packit
-        SELECT_OUTPUTPATH: output
-        artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
+        #SELECT_PACKITPATH: openwrt_packit
+        #SELECT_OUTPUTPATH: output
+        #artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
 
     - name: copy update files
       run: |
