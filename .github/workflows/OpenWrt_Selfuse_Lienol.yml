@@ -201,7 +201,7 @@ jobs:
         cp ./files/update*.sh ./output/
         rm -rf $(find ./output/ -name "sha256sums")
         cd $GITHUB_WORKSPACE/openwrt/bin
-        cp *.tar.gz /opt/openwrt_packit/output/
+        ##cp *.tar.gz /opt/openwrt_packit/output/
         echo "::setOutput name=status::success"
         
     - name: Upload OpenWrt Firmware to Release
