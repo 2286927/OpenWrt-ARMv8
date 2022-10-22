@@ -128,7 +128,7 @@ jobs:
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
         cd openwrt/bin/targets/*/*
-        rm -rf packages
+        rm -rf $(find ../bin/targets/ -name "packages" -o -name "*.buildinfo" -o -name "sha256sums" -o -name "*.manifest")
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::setOutput name=status::success"
         
@@ -201,7 +201,7 @@ jobs:
         cp ./files/update*.sh ./output/
         rm -rf $(find ./output/ -name "sha256sums")
         cd $GITHUB_WORKSPACE/openwrt/bin
-        cp IPK.tar.gz /opt/openwrt_packit/output/
+        cp *.tar.gz /opt/openwrt_packit/output/
         echo "::setOutput name=status::success"
         
     - name: Upload OpenWrt Firmware to Release
