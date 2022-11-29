@@ -182,8 +182,8 @@ jobs:
     - name: Upload OpenWrt Firmware to Release
       uses: ncipollo/release-action@v1
       with:
-        name: Xiaomi AloT Router AX3600 ${{ env.PRODUCT_NAME }}${{ env.DATE }}
-        tag: Xiaomi AloT Router AX3600${{ env.FILE_NAME }}
+        name: Xiaomi_AloT_Router_AX3600 ${{ env.PRODUCT_NAME }}${{ env.DATE }}
+        tag: Xiaomi_AloT_Router_AX3600${{ env.FILE_NAME }}
         artifacts: ${{ env.FIRMWARE }}/*
         allowUpdates: true
         removeArtifacts: true
