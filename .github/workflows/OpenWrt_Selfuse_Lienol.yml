@@ -22,10 +22,10 @@ on:
     types: started
 
 env:
-  #REPO_URL: https://github.com/Lienol/openwrt
-  #REPO_BRANCH: 21.02
-  REPO_URL: https://github.com/immortalwrt/immortalwrt
-  REPO_BRANCH: openwrt-21.02
+  REPO_URL: https://github.com/Lienol/openwrt
+  REPO_BRANCH: 21.02
+  #REPO_URL: https://github.com/immortalwrt/immortalwrt
+  #REPO_BRANCH: openwrt-21.02
   #REPO_BRANCH: master
   FEEDS_CONF: feeds/Lienolfeeds.conf.default
   CONFIG_FILE: MenuConfig/OpenWrt_Selfuse-Lienol.config
