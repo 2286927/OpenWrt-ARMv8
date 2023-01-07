@@ -13,19 +13,22 @@
 #sed -i 's/192.168.1.1/192.168.1.1/g' package/base-files/files/bin/config_generate
 
 # Hostname
-sed -i 's/OpenWrt/OctopusPlanet/g' package/base-files/files/bin/config_generate
+sed -i 's/ImmortalWrt/OctopusPlanet/g' package/base-files/files/bin/config_generate
 
 ####### Modify the version number
 sed -i '/DISTRIB_DESCRIPTION/d' package/base-files/files/etc/openwrt_release
-echo "DISTRIB_DESCRIPTION='OpenWrt $('+%V')'" >> package/base-files/files/etc/openwrt_release
-sed -i "s/OpenWrt /洲·Cy build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" package/base-files/files/etc/openwrt_release
+echo "DISTRIB_DESCRIPTION='ImmortalWrt $('+%V')'" >> package/base-files/files/etc/openwrt_release
+sed -i "s/ImmortalWrt /洲·Cy build $(TZ=UTC-8 date "+%Y.%m.%d") @ ImmortalWrt /g" package/base-files/files/etc/openwrt_release
 # DNS Cache FixUP
 echo -e "#max-ttl=600\nneg-ttl=600\nmin-cache-ttl=3600" >> package/network/services/dnsmasq/files/dnsmasq.conf
 # 修改连接数
 sed -i 's/net.netfilter.nf_conntrack_max=.*/net.netfilter.nf_conntrack_max=165535/g' package/kernel/linux/files/sysctl-nf-conntrack.conf
 
 # Timezone
-# sed -i "s/'UTC'/'CST-8'\n   set system.@system[-1].zonename='Asia\/Shanghai'/g" package/base-files/files/bin/config_generate
+sed -i "s/'UTC'/'CST-8'\n   set system.@system[-1].zonename='Asia\/Shanghai'/g" package/base-files/files/bin/config_generate
+sed -i 's/time1.apple.com/ntp.ntsc.ac.cn/g' package/base-files/files/bin/config_generate
+sed -i 's/time1.google.com/ntp.tencent.com/g' package/base-files/files/bin/config_generate
+sed -i 's/time.cloudflare.com/ntp1.aliyun.com/g' package/base-files/files/bin/config_generate
 
 # cpufreq
 sed -i 's/LUCI_DEPENDS.*/LUCI_DEPENDS:=\@\(arm\|\|aarch64\)/g' feeds/luci/applications/luci-app-cpufreq/Makefile
