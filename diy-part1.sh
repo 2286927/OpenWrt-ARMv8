@@ -18,5 +18,5 @@
 #sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 #sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 git clone https://github.com/kenzok8/small-package package/small-package
-git clone --depth=1 -b luci https://github.com/bootli/luci-app-turboacc.git package/luci-app-turboacc
-git clone --depth=1 -b luci https://github.com/jerrykuku/luci-app-jd-dailybonus.git package/luci-app-jd-dailybonus
+git clone https://github.com/bootli/luci-app-turboacc.git package/small-package/luci-app-turboacc
+git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git package/small-package/luci-app-jd-dailybonus
