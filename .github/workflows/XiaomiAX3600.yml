@@ -60,7 +60,7 @@ jobs:
         sudo -E apt-get -qq update
         #sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-latest)
         #sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* adoptopenjdk* mysql* php* mongodb* dotnet* moby* snapd* || true
-        sudo -E apt-get -qq install $(curl -fsSL https://raw.githubusercontent.com/2286927/OneCloud_Canbox-OpenWrt_DNSfilter/main/DependenciesList)
+        sudo -E apt-get -qq install $(curl -fsSL https://github.com/2286927/OpenWrtDependenciesList/raw/main/list1)
         sudo -E snap install clangd --classic
         sudo -E snap install powershell --classic
         sudo -E apt-get -qq autoremove --purge
