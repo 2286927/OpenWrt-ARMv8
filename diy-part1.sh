@@ -14,9 +14,9 @@
 
 # Add a feed source
 # sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
-# git clone https://github.com/kiddin9/openwrt-packages package/kiddin9
+git clone https://github.com/kiddin9/openwrt-packages package/kiddin9
 #sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 #sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
-git clone https://github.com/kenzok8/small-package package/small-package
-git clone https://github.com/bootli/luci-app-turboacc.git package/small-package/luci-app-turboacc
-git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git package/small-package/luci-app-jd-dailybonus
+#  git clone https://github.com/kenzok8/small-package package/small-package
+#  git clone https://github.com/bootli/luci-app-turboacc.git package/small-package/luci-app-turboacc
+#  git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git package/small-package/luci-app-jd-dailybonus
