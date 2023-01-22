@@ -20,5 +20,6 @@
 git clone https://github.com/kenzok8/small-package package/small-package
 git clone https://github.com/bootli/luci-app-turboacc.git package/small-package/luci-app-turboacc
 #svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-turboacc package/small-package/luci-app-turboacc
+svn export https://github.com/kiddin9/openwrt-packages/trunk/luci-app-rclone package/small-package/luci-app-rclone
 git clone https://github.com/bootli/luci-app-ddns-go.git package/ddns-go
 #git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git package/small-package/luci-app-jd-dailybonus
