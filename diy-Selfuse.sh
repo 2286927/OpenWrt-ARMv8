@@ -53,7 +53,7 @@ sed -i 's/services/system/g' feeds/luci/applications/luci-app-cpufreq/luasrc/con
 rm -rf ./feeds/packages/utils/dockerd
 rm -rf ./feeds/luci/luci-app-dockerman
 rm -rf ./feeds/luci/luci-app-docker
-rm -rf ./feeds/packages/docker
+rm -rf ./feeds/packages/utils/docker
 rm -rf ./package/small-package/luci-app-tencentcloud-cos
 rm -rf ./package/small-package/transmission-web-control
 # containerd Has验证
