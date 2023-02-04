@@ -13,12 +13,12 @@
 #sed -i 's/192.168.1.1/192.168.1.1/g' package/base-files/files/bin/config_generate
 
 # Hostname
-sed -i 's/ImmortalWrt/OctopusPlanet/g' package/base-files/files/bin/config_generate
+sed -i 's/OpenWrt/OctopusPlanet/g' package/base-files/files/bin/config_generate
 
 ####### Modify the version number
 sed -i '/DISTRIB_DESCRIPTION/d' package/base-files/files/etc/openwrt_release
-echo "DISTRIB_DESCRIPTION='ImmortalWrt $('+%V')'" >> package/base-files/files/etc/openwrt_release
-sed -i "s/ImmortalWrt /洲·Cy build $(TZ=UTC-8 date "+%Y.%m.%d") @ ImmortalWrt /g" package/base-files/files/etc/openwrt_release
+echo "DISTRIB_DESCRIPTION='OpenWrt $('+%D %V %C')'" >> package/base-files/files/etc/openwrt_release
+sed -i "s/OpenWrt /洲·Cy build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" package/base-files/files/etc/openwrt_release
 # DNS Cache FixUP
 echo -e "#max-ttl=600\nneg-ttl=600\nmin-cache-ttl=3600" >> package/network/services/dnsmasq/files/dnsmasq.conf
 # 修改连接数
