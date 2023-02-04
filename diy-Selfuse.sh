@@ -46,8 +46,17 @@ sed -i 's/services/system/g' feeds/luci/applications/luci-app-cpufreq/luasrc/con
 # git clone --depth=1 https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/luci-theme-opentomcat
 
 # dockerd去版本验证
-#sed -i 's/^\s*$[(]call\sEnsureVendoredVersion/#&/' feeds/packages/utils/dockerd/Makefile
+sed -i 's/^\s*$[(]call\sEnsureVendoredVersion/#&/' feeds/packages/utils/dockerd/Makefile
 #sed -i 's/^\s*$[(]call\sEnsureVendoredVersion/#&/' package/small-package/dockerd/Makefile
+
+# containerd Has验证
+sed -i 's/PKG_HASH:=.*/PKG_HASH:=skip/g' feeds/packages/utils/containerd/Makefile
+
+# 插件库改动
+#rm -rf ./package/small-package
+rm -rf ./feeds/kenzo
+rm -rf ./feeds/small
+# 个别插件删减
 rm -rf ./package/small-package/dockerd
 rm -rf ./package/small-package/luci-app-dockerman
 #rm -rf ./feeds/packages/utils/dockerd
@@ -56,5 +65,3 @@ rm -rf ./feeds/luci/luci-app-docker
 #rm -rf ./feeds/packages/utils/docker
 rm -rf ./package/small-package/luci-app-tencentcloud-cos
 rm -rf ./package/small-package/transmission-web-control
-# containerd Has验证
-sed -i 's/PKG_HASH:=.*/PKG_HASH:=skip/g' feeds/packages/utils/containerd/Makefile
