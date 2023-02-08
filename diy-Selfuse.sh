@@ -60,8 +60,8 @@ sed -i 's/PKG_HASH:=.*/PKG_HASH:=skip/g' feeds/packages/utils/containerd/Makefil
 # rm -rf ./package/small-package/dockerd
 # rm -rf ./package/small-package/luci-app-dockerman
 #rm -rf ./feeds/packages/utils/dockerd
-rm -rf ./feeds/luci/luci-app-aliyundrive-webdav
-rm -rf ./feeds/packages/aliyundrive-webdav
+rm -rf feeds/luci/luci-app-aliyundrive-webdav
+rm -rf feeds/packages/aliyundrive-webdav
 #svn export --force https://github.com/kiddin9/openwrt-packages/trunk/luci-app-aliyundrive-webdav feeds/kenzo/luci-app-aliyundrive-webdav
 #svn export --force https://github.com/kiddin9/openwrt-packages/trunk/aliyundrive-webdav feeds/kenzo/aliyundrive-webdav
 #rfeedsm -rf ./feeds/luci/luci-app-dockerman
