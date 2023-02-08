@@ -53,13 +53,13 @@ sed -i 's/^\s*$[(]call\sEnsureVendoredVersion/#&/' feeds/packages/utils/dockerd/
 sed -i 's/PKG_HASH:=.*/PKG_HASH:=skip/g' feeds/packages/utils/containerd/Makefile
 
 # 插件库改动
-# rm -rf ./package/small-package
+rm -rf package/small-package
 #rm -rf ./feeds/kenzo
 #rm -rf ./feeds/small
 # 个别插件删减
 #rm -rf ./package/small-package/dockerd
-rm -rf ./package/small-package/luci-app-ddns
-rm -rf .feeds/kenzo/luci-app-mosdns
+rm -rf package/small-package/luci-app-ddns
+rm -rf feeds/kenzo/luci-app-mosdns
 #rm -rf ./package/small-package/luci-app-dockerman
 #rm -rf ./feeds/packages/utils/dockerd
 #rm -rf ./feeds/luci/luci-app-dockerman
