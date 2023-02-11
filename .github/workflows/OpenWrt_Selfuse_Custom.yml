@@ -51,12 +51,13 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         docker rmi `docker images -q`
-        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /etc/mysql /etc/php /usr/local/lib/android /opt/ghc
+        sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d /usr/local/lib/android
+        sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* adoptopenjdk* mysql* php* mongodb* dotnet* moby* snapd* || true
         sudo -E apt-get -qq update
         #sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-latest)
         #sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* adoptopenjdk* mysql* php* mongodb* dotnet* moby* snapd* || true
-        sudo -E apt-get -qq install $(curl -fsSL https://raw.githubusercontent.com/2286927/OpenWrtDependenciesList/main/list1)
-        ##sudo -E bash -c 'bash <(curl -s https://build-scripts.immortalwrt.eu.org/init_build_environment.sh)'
+        # sudo -E apt-get -qq install $(curl -fsSL https://raw.githubusercontent.com/2286927/OpenWrtDependenciesList/main/list1)
+        sudo -E bash -c 'bash <(curl -s https://build-scripts.immortalwrt.eu.org/init_build_environment.sh)'
         ##sudo -E snap install clangd --classic
         ##sudo -E snap install powershell --classic
         sudo -E apt-get -qq autoremove --purge
@@ -64,6 +65,8 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
+        df -h
+        
     - name: Clone source code
       working-directory: /workdir
       run: |
@@ -82,6 +85,7 @@ jobs:
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
+        
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
@@ -95,12 +99,13 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
-    - name: SSH connection to Actions
-      uses: P3TERX/ssh2actions@v1.0.0
-      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
-      env:
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        
+#    - name: SSH connection to Actions
+#      uses: P3TERX/ssh2actions@v1.0.0
+#      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
+#      env:
+#        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+#        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
     - name: Download package
       id: package
@@ -110,6 +115,7 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
+        
     - name: Compile the firmware
       id: compile
       run: |
@@ -119,35 +125,45 @@ jobs:
         echo "::setOutput name=status::success"
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
-        echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
-        echo "DATE=$(date "+%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
+        echo "FILE_DATE=$(date +"%Y-%m-%d %H%M")" >> $GITHUB_ENV
+        echo "DATE=$(date +"%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
+        echo "TAG_DATE=$(date +"%m%d-%H%M%S")" >> $GITHUB_ENV
+        
     - name: Check space usage
       if: (!cancelled())
       run: df -hT
 
-    - name: Upload bin directory
-      uses: actions/upload-artifact@main
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
+    - name: Prepare artifact
+      run: |
+        cd ./openwrt/bin
+        mkdir -p ./firmware
+        mkdir -p ./package
+        rm -rf $(find ../bin/targets/ -name "packages" -o -name "*.buildinfo" -o -name "sha256sums" -o -name "*.manifest")
+        cp -rf $(find ../bin/targets/ -type f) ./firmware/
+        cp -rf $(find ../bin/packages/ -type f -name "*.ipk") ./package/
+        cd ./package
+        tar -zcvf IPK.tar.gz *
+        mv -f IPK.tar.gz ../
+
+    - name: Deliver package
+      uses: actions/upload-artifact@v3
       with:
-        name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: openwrt/bin
+        name: IPK ${{ env.FILE_DATE }}
+        path: ./openwrt/bin/package/
+
+    - name: Deliver firmware
+      uses: actions/upload-artifact@v3
+      with:
+        name: firmware ${{ env.FILE_DATE }}
+        path: ./openwrt/bin/firmware/
 
     - name: Organize files
       id: organize
-      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        cd openwrt/bin/targets/*/*
-        rm -rf $(find ../bin/targets/ -name "packages" -o -name "*.buildinfo" -o -name "sha256sums" -o -name "*.manifest")
+        cd openwrt
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
-        echo "::setOutput name=status::success"
+        echo "{status}={success}" >> $GITHUB_OUTPUT
         
-    - name: Upload firmware directory
-      uses: actions/upload-artifact@main
-      if: steps.organize.outputs.status == 'success' && !cancelled()
-      with:
-        name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: ${{ env.FIRMWARE }}
-
 #    - name: Upload firmware to cowtransfer
 #      id: cowtransfer
 #      if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
@@ -176,15 +192,15 @@ jobs:
 #        [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
 #        echo "::set-output name=status::success"
 
-    - name: Upload firmware to release
-      uses: softprops/action-gh-release@v1
-      if: steps.tag.outputs.status == 'success' && !cancelled()
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ steps.tag.outputs.release_tag }}
-        body_path: release.txt
-        files: ${{ env.FIRMWARE }}/*
+#    - name: Upload firmware to release
+#      uses: softprops/action-gh-release@v1
+#      if: steps.tag.outputs.status == 'success' && !cancelled()
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      with:
+#        tag_name: ${{ steps.tag.outputs.release_tag }}
+#        body_path: release.txt
+#        files: ${{ env.FIRMWARE }}/*
 
     - name: Package Armvirt as OpenWrt
       #uses: unifreq/openwrt_packit@master
@@ -195,11 +211,11 @@ jobs:
         KERNEL_AUTO_LATEST:  true
         KERNEL_VERSION_NAME: 5.4_5.15_6.1
         WHOAMI: 洲·Cy
-        ENABLE_WIFI_K504: 0
-        ENABLE_WIFI_K510: 0
-        SW_FLOWOFFLOAD: 1
-        HW_FLOWOFFLOAD: 0
-        SFE_FLOW: 0
+#        ENABLE_WIFI_K504: 0
+#        ENABLE_WIFI_K510: 0
+#        SW_FLOWOFFLOAD: 1
+#        HW_FLOWOFFLOAD: 0
+#        SFE_FLOW: 0
         #SELECT_PACKITPATH: openwrt_packit
         #SELECT_OUTPUTPATH: output
         #artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
@@ -210,15 +226,15 @@ jobs:
         cp ./files/update*.sh ./output/
         rm -rf $(find ./output/ -name "sha256sums")
         cd $GITHUB_WORKSPACE/openwrt/bin
-        ##cp *.tar.gz /opt/openwrt_packit/output/
-        echo "::setOutput name=status::success"
+        cp IPK.tar.gz /opt/openwrt_packit/output/
+        echo "{status}={success}" >> $GITHUB_OUTPUT
         
     - name: Upload OpenWrt Firmware to Release
       uses: ncipollo/release-action@v1
       with:
         name: OpenWrt_Selfuse_Custom ${{ env.PRODUCT_NAME }}${{ env.DATE }}
-        tag: OpenWrt_Selfuse_Custom${{ env.FILE_NAME }}
-        #tag: ${{ env.TAG_DATE }}
+        #tag: OpenWrt_Selfuse_Custom${{ env.FILE_NAME }}
+        tag: OpenWrt_Selfuse_Custom${{ env.TAG_DATE }}
         artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
         allowUpdates: true
         removeArtifacts: true
