@@ -41,7 +41,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Checkout
@@ -58,7 +58,7 @@ jobs:
         #sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-latest)
         #sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* adoptopenjdk* mysql* php* mongodb* dotnet* moby* snapd* || true
         #sudo -E apt-get -qq install $(curl -fsSL https://raw.githubusercontent.com/2286927/OpenWrtDependenciesList/main/Lienol)
-        sudo -E apt-get -qq install $(curl -fsSL https://is.gd/depends_ubuntu_2004)
+        sudo -E apt-get -qq install $(curl -fsSL https://is.gd/depends_ubuntu_2204)
         # sudo -E bash -c 'bash <(curl -s https://build-scripts.immortalwrt.eu.org/init_build_environment.sh)'
         ##sudo -E snap install clangd --classic
         ##sudo -E snap install powershell --classic
