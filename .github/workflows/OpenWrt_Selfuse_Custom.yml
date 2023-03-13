@@ -236,8 +236,8 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         name: OpenWrt_Selfuse_Custom ${{ env.PRODUCT_NAME }}${{ env.DATE }}
-        #tag: OpenWrt_Selfuse_Custom${{ env.FILE_NAME }}
-        tag: OpenWrt_Selfuse_Custom${{ env.TAG_DATE }}
+        tag: OpenWrt_Selfuse_Custom${{ env.FILE_NAME }}
+        #tag: OpenWrt_Selfuse_Custom${{ env.TAG_DATE }}
         artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
         allowUpdates: true
         removeArtifacts: true
