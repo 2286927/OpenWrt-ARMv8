@@ -221,7 +221,7 @@ jobs:
 #        SFE_FLOW: 0
         #SELECT_PACKITPATH: openwrt_packit
         #SELECT_OUTPUTPATH: output
-        #artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
+        artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
 
     - name: copy update files
       run: |
