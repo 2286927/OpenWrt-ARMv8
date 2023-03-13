@@ -24,8 +24,8 @@ on:
 env:
   REPO_URL: https://github.com/Lienol/openwrt
   #REPO_BRANCH: 21.02
-  REPO_BRANCH: 22.03
-  #REPO_BRANCH: master
+  #REPO_BRANCH: 22.03
+  REPO_BRANCH: master
   #REPO_URL: https://github.com/immortalwrt/immortalwrt
   #REPO_BRANCH: openwrt-21.02
   #REPO_BRANCH: master
@@ -244,10 +244,10 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         body: |
           This is OpenWrt firmware for Armvirt 64
-          * Firmware information
+          * Firmware Lienol
           * Selfuse是自用固件，插件根据个人需要删减.
-          * REPO_BRANCH: 22.03
-          * 默认IP: 192.168.1.1
+          * REPO_BRANCH: master
+          * 默认IP: 172.16.5.55
           * 默认密码: password
           
 #    - name: Delete workflow runs
