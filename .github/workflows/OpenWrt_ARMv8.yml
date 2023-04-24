@@ -170,7 +170,8 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         name: OpenWrt-ARMv8 ${{ env.DATE }}
-        tag: ${{ env.TAG_DATE }}
+        #tag: ${{ env.TAG_DATE }}
+        tag: ${{ env.FILE_NAME }}
         artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
         allowUpdates: true
         removeArtifacts: true
