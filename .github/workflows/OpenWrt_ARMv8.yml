@@ -169,7 +169,8 @@ jobs:
     - name: Upload OpenWrt Firmware to Release
       uses: ncipollo/release-action@v1
       with:
-        name: OpenWrt-ARMv8 ${{ env.DATE }}
+        #name: OpenWrt-ARMv8 ${{ env.DATE }}
+        name: OpenWrt-ARMv8 ${{ env.PRODUCT_NAME }}${{ env.DATE }}
         #tag: ${{ env.TAG_DATE }}
         tag: ${{ env.FILE_NAME }}
         artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
