@@ -172,7 +172,7 @@ jobs:
 #        #name: OpenWrt-ARMv8 ${{ env.DATE }}
         name: OpenWrt-ARMv8 ${{ env.PRODUCT_NAME }}${{ env.DATE }}
 #        #tag: ${{ env.TAG_DATE }}
-        tag: ${{ env.FILE_NAME }}
+        tag: OpenWrt-ARMv8${{ env.FILE_NAME }}
         artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
         allowUpdates: true
         removeArtifacts: true
