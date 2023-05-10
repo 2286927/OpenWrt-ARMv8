@@ -17,12 +17,13 @@
 #git clone https://github.com/kiddin9/openwrt-packages package/kiddin9
 #sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 #sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
-git clone https://github.com/kenzok8/small-package package/small-package
-svn export --force https://github.com/kiddin9/openwrt-packages/trunk/luci-app-turboacc package/small-package/luci-app-turboacc
-svn export --force https://github.com/kiddin9/openwrt-packages/trunk/shortcut-fe package/small-package/luci-app-turboacc/shortcut-fe
-svn export --force https://github.com/kiddin9/openwrt-packages/trunk/luci-app-rclone package/small-package/luci-app-rclone
+#git clone https://github.com/kenzok8/small-package package/small-package
+git clone https://github.com/kiddin9/openwrt-packages package/kiddin9
+#svn export --force https://github.com/kiddin9/openwrt-packages/trunk/luci-app-turboacc package/small-package/luci-app-turboacc
+#svn export --force https://github.com/kiddin9/openwrt-packages/trunk/shortcut-fe package/small-package/luci-app-turboacc/shortcut-fe
+#svn export --force https://github.com/kiddin9/openwrt-packages/trunk/luci-app-rclone package/small-package/luci-app-rclone
 #git clone https://github.com/bootli/luci-app-ddns-go.git package/ddns-go
-git clone https://github.com/sirpdboy/luci-app-ddns-go.git package/ddns-go
+#git clone https://github.com/sirpdboy/luci-app-ddns-go.git package/ddns-go
 #svn export --force https://github.com/kiddin9/openwrt-packages/trunk/ddns-script#s-dnspod package/small-package/luci-app-ddns/ddns-scripts-dnspod
 #svn export --force https://github.com/kiddin9/openwrt-packages/trunk/luci-app-ddns package/small-package/luci-app-ddns
 #git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git package/small-package/luci-app-jd-dailybonus
