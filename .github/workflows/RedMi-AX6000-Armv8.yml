@@ -22,7 +22,7 @@ on:
 #    branches:
 #      - master
     paths:
-      - 'Config_Files/Redmi-AX6000_AdGuardHome.config'
+      - 'MenuConfig/Redmi-AX6000_AdGuardHome.config'
 #  schedule:
 #    - cron: 0 2 * * 5
 #  watch:
@@ -36,8 +36,8 @@ env:
   #REPO_BRANCH: master
   REPO_URL: https://github.com/padavanonly/immortalwrtARM
   REPO_BRANCH: mt7986
-  FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: Config_Files/Redmi-AX6000_AdGuardHome.config
+  FEEDS_CONF: feeds/feeds.conf.default
+  CONFIG_FILE: MenuConfig/Redmi-AX6000_AdGuardHome.config
   DIY_P1_SH: DIY/diy-part1-RedmiAX6000.sh
   DIY_P2_SH: DIY/diy-part2-RedmiAX6000.sh
   UPLOAD_BIN_DIR: true
