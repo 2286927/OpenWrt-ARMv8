@@ -36,7 +36,7 @@ env:
   #REPO_BRANCH: master
   REPO_URL: https://github.com/padavanonly/immortalwrtARM
   REPO_BRANCH: mt7986
-  FEEDS_CONF: feeds/feeds.conf.default
+  FEEDS_CONF: feeds/AX6000feeds.conf.default
   CONFIG_FILE: MenuConfig/Redmi-AX6000_AdGuardHome.config
   DIY_P1_SH: DIY/diy-part1-RedmiAX6000.sh
   DIY_P2_SH: DIY/diy-part2-RedmiAX6000.sh
