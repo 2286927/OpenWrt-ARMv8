@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Redmi-AX6000_AdGuardHome
+name: Redmi-AX6000
 
 on:
   repository_dispatch:
