@@ -51,10 +51,6 @@ sed -i 's/services/system/g' feeds/luci/applications/luci-app-cpufreq/luasrc/con
 ## git clone --depth=1 https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/luci-theme-opentomcat
 rm -rf feeds/luci/luci-app-aliyundrive-webdav
 rm -rf feeds/packages/aliyundrive-webdav
-rm -rf feeds/luci/luci-app-dockerman
-rm -rf feeds/packages/docker
-rm -rf feeds/packages/dockerd
-rm -rf feeds/packages/luci-lib-docker
 
 #git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
 #git clone https://github.com/jerrykuku/luci-app-argon-config.git package/luci-app-argon-config
