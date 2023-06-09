@@ -49,8 +49,8 @@ sed -i 's/services/system/g' feeds/luci/applications/luci-app-cpufreq/luasrc/con
 ## git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall2.git package/openwrt-passwall2
 ## git clone --depth=1 -b luci https://github.com/xiaorouji/openwrt-passwall.git package/luci-app-passwall
 ## git clone --depth=1 https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/luci-theme-opentomcat
-svn export --force https://github.com/kiddin9/openwrt-packages/trunk/luci-app-dockerman feeds/luci/luci-app-dockerman
-svn export --force https://github.com/kiddin9/openwrt-packages/trunk/dockerd feeds/packages/utils/dockerd
+#svn export --force https://github.com/kiddin9/openwrt-packages/trunk/luci-app-dockerman feeds/luci/luci-app-dockerman
+#svn export --force https://github.com/kiddin9/openwrt-packages/trunk/dockerd feeds/packages/utils/dockerd
 
 rm -rf feeds/luci/luci-app-aliyundrive-webdav
 rm -rf feeds/packages/aliyundrive-webdav
@@ -59,10 +59,10 @@ rm -rf feeds/packages/aliyundrive-webdav
 #git clone https://github.com/jerrykuku/luci-app-argon-config.git package/luci-app-argon-config
 
 # dockerd去版本验证
-#sed -i 's/^\s*$[(]call\sEnsureVendoredVersion/#&/' feeds/packages/utils/dockerd/Makefile
+sed -i 's/^\s*$[(]call\sEnsureVendoredVersion/#&/' feeds/packages/utils/dockerd/Makefile
 
 # containerd Has验证
-#sed -i 's/PKG_HASH:=.*/PKG_HASH:=skip/g' feeds/packages/utils/containerd/Makefile
+sed -i 's/PKG_HASH:=.*/PKG_HASH:=skip/g' feeds/packages/utils/containerd/Makefile
 
 sed -i '741a\
                 <tr><td width="33%">&#32534;&#35793;&#32773;&#58;&#32;&#27954;&#183;&#67;&#121;</td><td><a href="https://github.com/2286927/OpenWrt-ARMv8" style="color: black;" target="_blank">&#32534;&#35793;&#22320;&#22336;</a></td></tr>\
