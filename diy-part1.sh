@@ -23,7 +23,7 @@ rm -rf package/openwrt-packages/luci-app-adguardhome
 rm -rf package/openwrt-packages/adguardhome
 rm -rf package/openwrt-packages/luci-app-ddns-go
 rm -rf package/openwrt-packages/ddns-go
-rm -rf feeds/packages/net/adguardhome
+#rm -rf feeds/packages/net/adguardhome
 #git clone https://github.com/kenzok8/small-package package/small-package
 # svn export --force https://github.com/kiddin9/openwrt-packages/trunk/luci-app-turboacc package/small-package/luci-app-turboacc
 # svn export --force https://github.com/kiddin9/openwrt-packages/trunk/shortcut-fe package/small-package/luci-app-turboacc/shortcut-fe
