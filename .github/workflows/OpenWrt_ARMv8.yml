@@ -24,7 +24,7 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  FEEDS_CONF: feeds.conf.default
+#  FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: OpenWrt_ARMv8.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-ARMv8.sh
@@ -41,12 +41,15 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Check server configuration
       run: |
-        echo "CPU物理数量:$(cat /proc/cpuinfo | grep "physical id" | sort | uniq | wc -l)"
-        echo -e "CPU核心及版本信息：$(cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c) \n"
+        cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c > CPU
+        cat /proc/cpuinfo | grep "cpu cores" | uniq >> CPU
+        sed -i 's|[[:space:]]||g; s|^.||' CPU && sed -i 's|CPU||g; s|pucores:||' CPU
+        CPUNAME="$(awk 'NR==1' CPU)" && CPUCORES="$(awk 'NR==2' CPU)"
+        curl -k --data chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" --data "text=x86-docker 正在使用 [${CPUNAME} CPU]  [${CPUCORES} 核心]  [lede] 源码 编译固件中,请耐心等待..." "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=${MSG}"
 
     - name: Initialization environment
       env:
@@ -56,7 +59,7 @@ jobs:
         sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d /usr/local/lib/android
         sudo -E apt-mark hold grub-efi-amd64-signed
         sudo -E apt update
-        sudo -E apt -y purge azure-cli* docker* ghc* zulu* llvm* firefox google* dotnet* powershell* openjdk* mysql* php* mongodb* dotnet* moby* snap*
+        sudo -E apt -y purge azure-cli* docker* ghc* zulu* llvm* firefox google* dotnet* powershell* openjdk* mysql* php* mongodb* dotnet* snap*
         sudo -E apt -y full-upgrade
         sudo -E apt -y install $(curl -fsSL https://is.gd/depends_ubuntu_2204)
         sudo -E systemctl daemon-reload
@@ -93,6 +96,7 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
+
 #    - name: SSH connection to Actions
 #      uses: P3TERX/ssh2actions@v1.0.0
 #      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
@@ -106,13 +110,15 @@ jobs:
         cd openwrt
         make defconfig
         make download -j16
+        find dl -size -1024c -exec ls -l {} \;
+        find dl -size -1024c -exec rm -f {} \;
 
     - name: Compile the firmware
       id: compile
       run: |
         cd openwrt
-        echo -e "$(nproc) thread compile"
-        make -j$(nproc) || make -j1 || make -j1 V=s
+        echo -e "$(($(nproc)+1)) thread compile"
+        make -j$(($(nproc)+1)) || make -j1 V=s
         echo "{status}={success}" >> $GITHUB_OUTPUT
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
@@ -139,13 +145,13 @@ jobs:
     - name: Deliver package
       uses: actions/upload-artifact@v3
       with:
-        name: IPK ${{ env.FILE_DATE }}
+        name: ARMv8_IPK ${{ env.FILE_DATE }}
         path: ./openwrt/bin/package/
 
     - name: Deliver firmware
       uses: actions/upload-artifact@v3
       with:
-        name: firmware ${{ env.FILE_DATE }}
+        name: ARMv8_firmware ${{ env.FILE_DATE }}
         path: ./openwrt/bin/firmware/
 
     - name: Organize files
@@ -169,7 +175,7 @@ jobs:
       run: |
         cd /opt/openwrt_packit
         cp ./files/update*.sh ./output/
-        rm -rf $(find ./output/ -name "sha256sums")
+        rm -rf $(find ./output/ -name "sha256sums" -o -name "*.gz.sha" -o -name "*.tar.gz")
         cd $GITHUB_WORKSPACE/openwrt/bin
         cp IPK.tar.gz /opt/openwrt_packit/output/
         echo "{status}={success}" >> $GITHUB_OUTPUT
@@ -177,10 +183,10 @@ jobs:
     - name: Upload OpenWrt Firmware to Release
       uses: ncipollo/release-action@v1
       with:
-#        #name: OpenWrt-ARMv8 ${{ env.DATE }}
-        name: OpenWrt-ARMv8 ${{ env.PRODUCT_NAME }}${{ env.DATE }}
-#        #tag: ${{ env.TAG_DATE }}
-        tag: OpenWrt-ARMv8${{ env.FILE_NAME }}
+#        name: OpenWrt-ARMv8 ${{ env.DATE }}
+        name: ARMv8-lede ${{ env.PRODUCT_NAME }}${{ env.DATE }}
+        tag: ${{ env.TAG_DATE }}
+#        tag: OpenWrt-ARMv8${{ env.FILE_NAME }}
         artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
         allowUpdates: true
         removeArtifacts: true
