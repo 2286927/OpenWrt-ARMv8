@@ -59,7 +59,7 @@ rm -rf feeds/packages/aliyundrive-webdav
 #git clone https://github.com/jerrykuku/luci-app-argon-config.git package/luci-app-argon-config
 
 # dockerd、docker回滚25.0.5版本
-sed -i 's/PKG_VERSION:=[0-9]\+\.[0-9]\+\.[0-9]\+/PKG_VERSION:=25.0.5/g' feeds/packages/utils/docker/Makefile
+#sed -i 's/PKG_VERSION:=[0-9]\+\.[0-9]\+\.[0-9]\+/PKG_VERSION:=25.0.5/g' feeds/packages/utils/docker/Makefile
 sed -i 's/PKG_VERSION:=[0-9]\+\.[0-9]\+\.[0-9]\+/PKG_VERSION:=25.0.5/g' feeds/packages/utils/dockerd/Makefile
 
 # dockerd去版本验证
