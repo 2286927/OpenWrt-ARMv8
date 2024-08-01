@@ -185,8 +185,8 @@ jobs:
       with:
 #        name: OpenWrt-ARMv8 ${{ env.DATE }}
         name: ARMv8-lede ${{ env.PRODUCT_NAME }}${{ env.DATE }}
-        tag: ${{ env.TAG_DATE }}
-#        tag: OpenWrt-ARMv8${{ env.FILE_NAME }}
+#       tag: ${{ env.TAG_DATE }}
+        tag: OpenWrt-ARMv8${{ env.FILE_NAME }}
         artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
         allowUpdates: true
         removeArtifacts: true
