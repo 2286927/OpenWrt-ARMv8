@@ -28,6 +28,7 @@ env:
   CONFIG_FILE: OpenWrt_ARMv8.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-ARMv8.sh
+  DIY_P3_SH: DIY/RollbacktoDockerVersion.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: false
   UPLOAD_COWTRANSFER: false
@@ -61,7 +62,7 @@ jobs:
         sudo -E apt update
         sudo -E apt -y purge azure-cli* docker* ghc* zulu* llvm* firefox google* dotnet* powershell* openjdk* mysql* php* mongodb* dotnet* snap*
         sudo -E apt -y full-upgrade
-        sudo -E apt -y install $(curl -fsSL https://is.gd/depends_ubuntu_2204)
+        sudo -E apt -y install $(curl -fsSL https://is.gd/depends_ubuntu_2204) dos2unix
         sudo -E systemctl daemon-reload
         sudo -E apt -y autoremove --purge
         sudo -E apt clean
@@ -76,6 +77,13 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
+    - name: 检查脚本权限&转换为Unix格式
+      run: |
+        cd ./DIY
+
+        dos2unix ./*.sh
+        chmod +x ./*.sh 
+
     - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
@@ -84,7 +92,7 @@ jobs:
         $GITHUB_WORKSPACE/$DIY_P1_SH
 
     - name: Update feeds
-      run: cd openwrt && ./scripts/feeds update -a
+      run: cd openwrt && ./scripts/feeds update -a && bash $GITHUB_WORKSPACE/$DIY_P3_SH
 
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
