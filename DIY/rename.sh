@@ -9,7 +9,7 @@ for file in "$dir"/*; do
     filename=$(basename "$file")
     
     # 尝试替换指定的部分
-    new_filename="${filename//R2?.*.*_k6.6.??-flippy-??+/k6.6-flippy+}"
+    new_filename="${filename//R2?.*.*_k6.6.??-flippy-*+/k6.6-flippy+}"
     
     # 如果文件名发生了改变，则重命名文件
     if [ "$filename" != "$new_filename" ]; then
