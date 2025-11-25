@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 修改默认IP
-sed -i 's/192.168.1.1/192.168.100.1/g' package/base-files/luci2/bin/config_generate
+sed -i 's/192.168.1.1/172.16.1.1/g' package/base-files/luci2/bin/config_generate
 
 # 更改默认 Shell 为 zsh
 # sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
@@ -63,7 +63,7 @@ git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git packa
 # git clone --depth=1 https://github.com/sbwml/luci-app-argon-config.git package/luci-app-argon-config
 
 # 更改 Argon 主题背景
-cp -f $GITHUB_WORKSPACE/images/bg1.jpg package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
+#cp -f $GITHUB_WORKSPACE/images/bg1.jpg package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 
 # 晶晨宝盒
 rm -rf package/luci-app-amlogic
