@@ -9,7 +9,7 @@ env:
   #REPO_URL: https://github.com/coolsnowwolf/lede
   #REPO_BRANCH: master
   REPO_URL: https://github.com/immortalwrt/immortalwrt
-  REPO_BRANCH: openwrt-23.05
+  REPO_BRANCH: openwrt-24.10
   CONFIG_FILE: MenuConfig/rockchip.config
   EXTRA_CONFIG: MenuConfig/extra.config
   DIY_SCRIPT: DIY/diy-script.sh
