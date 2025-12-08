@@ -56,6 +56,8 @@ rm -rf feeds/package/helloworld
 rm -rf feeds/packages/lang/golang
 rm -rf feeds/packages/net/{xray-core,v2ray-geodata,sing-box,chinadns-ng,dns2socks,hysteria,ipt2socks,microsocks,naiveproxy,shadowsocks-libev,shadowsocks-rust,shadowsocksr-libev,simple-obfs,tcping,trojan-plus,tuic-client,v2ray-plugin,xray-plugin,geoview,shadow-tls}
 rm -rf feeds/luci/applications/luci-app-passwall
+rm -rf feeds/luci/applications/luci-app-adguardhome
+rm -rf feeds/packages/net/adguardhome
 # rm -rf feeds/packages/net/ddns-go
 
 # Git稀疏克隆，只克隆指定目录到本地
@@ -72,7 +74,8 @@ function git_sparse_clone() {
 # git clone --depth=1 https://github.com/kongfl888/luci-app-adguardhome package/luci-app-adguardhome
 # git clone --depth=1 -b openwrt-18.06 https://github.com/tty228/luci-app-wechatpush package/luci-app-serverchan
 git clone --depth 1 https://ghfast.top/https://github.com/sirpdboy/luci-app-adguardhome temp-adg && mv temp-adg/luci-app-adguardhome package/luci-app-adguardhome && rm -rf temp-adg
-git clone --depth 1 https://github.com/sirpdboy/luci-app-cupsd package
+#git clone --depth 1 https://github.com/sirpdboy/luci-app-cupsd package
+git clone --depth 1 https://github.com/kiddin9/kwrt-packages/trunk/luci-app-cupsd package
 git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff package/luci-app-poweroff
 git clone --depth=1 https://github.com/Jason6111/luci-app-netdata package/luci-app-netdata
 git_sparse_clone main https://github.com/Lienol/openwrt-package luci-app-filebrowser luci-app-ssr-mudb-server
