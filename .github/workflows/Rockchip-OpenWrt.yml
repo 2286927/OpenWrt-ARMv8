@@ -10,8 +10,8 @@ env:
   #REPO_BRANCH: master
   REPO_URL: https://github.com/immortalwrt/immortalwrt
   REPO_BRANCH: openwrt-24.10
-  CONFIG_FILE: MenuConfig/rockchip.config
-  EXTRA_CONFIG: MenuConfig/extra.config
+  CONFIG_FILE: MenuConfig/rockchip_r68s.config
+  #EXTRA_CONFIG: MenuConfig/extra.config
   DIY_SCRIPT: DIY/diy-script.sh
   CLASH_KERNEL: arm64
   CACHE_TOOLCHAIN: true
@@ -118,7 +118,7 @@ jobs:
       run: |
         [ -e files ] && mv files $OPENWRT_PATH/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRT_PATH/.config
-        cat $EXTRA_CONFIG >> $OPENWRT_PATH/.config
+        # cat $EXTRA_CONFIG >> $OPENWRT_PATH/.config
         chmod +x $GITHUB_WORKSPACE/scripts/*.sh
         chmod +x $DIY_SCRIPT
         cd $OPENWRT_PATH
