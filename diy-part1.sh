@@ -74,10 +74,13 @@ function git_sparse_clone() {
 # git clone --depth=1 https://github.com/kongfl888/luci-app-adguardhome package/luci-app-adguardhome
 # git clone --depth=1 -b openwrt-18.06 https://github.com/tty228/luci-app-wechatpush package/luci-app-serverchan
 git clone --depth 1 https://github.com/sirpdboy/luci-app-adguardhome temp-adg && mv temp-adg/luci-app-adguardhome package/luci-app-adguardhome && rm -rf temp-adg
-svn export --force https://github.com/kiddin9/kwrt-packages/trunk/luci-app-webdav package/luci-app-webdav
+git clone --depth 1 https://github.com/sbwml/luci-app-webdav package/luci-app-webdav
+git clone --depth 1 https://github.com/sirpdboy/luci-app-cupsd cupsd1 && mv -n cupsd1/{luci-app-cupsd,cups} ./ ; rm -rf cupsd1
+git sparse clone main https://github.com/sbwml/openwrt_pkgs luci-app-socat
+#svn export --force https://github.com/kiddin9/kwrt-packages/trunk/luci-app-webdav package/luci-app-webdav
 #git clone --depth 1 https://github.com/sirpdboy/luci-app-cupsd package
-svn export --force https://github.com/kiddin9/kwrt-packages/trunk/luci-app-cupsd package/luci-app-cupsd
-svn export --force https://github.com/kiddin9/kwrt-packages/trunk/luci-app-socat package/luci-app-socat
+#svn export --force https://github.com/kiddin9/kwrt-packages/trunk/luci-app-cupsd package/luci-app-cupsd
+#svn export --force https://github.com/kiddin9/kwrt-packages/trunk/luci-app-socat package/luci-app-socat
 git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff package/luci-app-poweroff
 git clone --depth=1 https://github.com/Jason6111/luci-app-netdata package/luci-app-netdata
 git_sparse_clone main https://github.com/Lienol/openwrt-package luci-app-filebrowser luci-app-ssr-mudb-server
