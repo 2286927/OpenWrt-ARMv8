@@ -176,9 +176,9 @@ jobs:
       uses: ophub/flippy-openwrt-actions@main
       env:
         OPENWRT_ARMVIRT: openwrt/bin/targets/*/*/*.tar.gz
-        #KERNEL_REPO_URL: https://github.com/yunxi993/OpenWrt-ARMv8/tree/main
+        #KERNEL_REPO_URL: https://github.com/ophub/kernel/releases/tag/kernel_flippy
         PACKAGE_SOC: s912
-        KERNEL_VERSION_NAME: 5.15.y_6.1.y_6.6.y
+        KERNEL_VERSION_NAME: 6.6.y_6.12.y
         #KERNEL_VERSION_NAME: 5.15.y_6.6.y
         KERNEL_AUTO_LATEST:  true
         WHOAMI: Z·Cy
@@ -190,8 +190,8 @@ jobs:
         rm -rf $(find ./output/ -name "sha256sums" -o -name "*.gz.sha" -o -name "*.tar.gz")
         cd $GITHUB_WORKSPACE/openwrt/bin
         cp IPK.tar.gz /opt/openwrt_packit/output/
-        chmod +x $GITHUB_WORKSPACE/DIY/rename.sh
-        bash $GITHUB_WORKSPACE/DIY/rename.sh
+        #chmod +x $GITHUB_WORKSPACE/DIY/rename.sh
+        #bash $GITHUB_WORKSPACE/DIY/rename.sh
         echo "{status}={success}" >> $GITHUB_OUTPUT
 
     - name: Upload OpenWrt Firmware to Release
