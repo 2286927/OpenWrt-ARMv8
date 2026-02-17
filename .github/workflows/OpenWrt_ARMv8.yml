@@ -190,8 +190,8 @@ jobs:
         rm -rf $(find ./output/ -name "sha256sums" -o -name "*.gz.sha" -o -name "*.tar.gz")
         cd $GITHUB_WORKSPACE/openwrt/bin
         cp IPK.tar.gz /opt/openwrt_packit/output/
-        #chmod +x $GITHUB_WORKSPACE/DIY/rename.sh
-        #bash $GITHUB_WORKSPACE/DIY/rename.sh
+        chmod +x $GITHUB_WORKSPACE/DIY/rename.sh
+        bash $GITHUB_WORKSPACE/DIY/rename.sh
         echo "{status}={success}" >> $GITHUB_OUTPUT
 
     - name: Upload OpenWrt Firmware to Release
