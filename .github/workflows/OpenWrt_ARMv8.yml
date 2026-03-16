@@ -154,7 +154,7 @@ jobs:
         mv -f IPK.tar.gz ../
 
     - name: Deliver package
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: ARMv8_IPK ${{ env.FILE_DATE }}
         path: ./openwrt/bin/package/
@@ -195,7 +195,7 @@ jobs:
         echo "{status}={success}" >> $GITHUB_OUTPUT
 
     - name: Upload OpenWrt Firmware to Release
-      uses: ncipollo/release-action@v1
+      uses: ncipollo/release-action@main
       with:
 #        name: OpenWrt-ARMv8 ${{ env.DATE }}
         name: ARMv8-lede ${{ env.PRODUCT_NAME }}${{ env.DATE }}
