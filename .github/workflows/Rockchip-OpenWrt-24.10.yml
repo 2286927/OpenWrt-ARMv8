@@ -1,4 +1,4 @@
-name: Rockchip OpenWrt
+name: Rockchip OpenWrt-24.10
 
 on:
   repository_dispatch:
