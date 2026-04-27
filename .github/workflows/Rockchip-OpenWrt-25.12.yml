@@ -14,7 +14,7 @@ env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
   ##REPO_BRANCH: openwrt-24.10
   REPO_BRANCH: openwrt-25.12
-  CONFIG_FILE: MenuConfig/rockchip_r68s.config
+  CONFIG_FILE: MenuConfig/rockchip_r68s-25.12.config
   #EXTRA_CONFIG: MenuConfig/extra.config
   DIY_SCRIPT: DIY/diy-script.sh
   CLASH_KERNEL: arm64
