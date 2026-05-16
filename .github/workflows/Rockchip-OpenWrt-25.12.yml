@@ -118,16 +118,6 @@ jobs:
         ./scripts/feeds update -a
         ./scripts/feeds install -a
 
-    # ========== 把这段代码加在这里 ==========
-    - name: 自动升级 Golang 到 1.26.1
-      run: |
-        cd package/lang/golang
-        sed -i 's/GO_VERSION:=1.25.*/GO_VERSION:=1.26.1/' Makefile
-        sed -i 's/GO_SHA256:=.*/GO_SHA256:=faf8289314c28d1789d18cdd1432c15edde4530a76391886d10a4af6513940f6/' Makefile
-        cd ../../..
-        rm -rf tmp/ dl/go-mod-cache/ build_dir/target-*/Xray-core-*/
-    # ======================================
-
     - name: Load Custom Configuration
       run: |
         [ -e files ] && mv files $OPENWRT_PATH/files
