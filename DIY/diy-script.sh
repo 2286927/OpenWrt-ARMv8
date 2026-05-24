@@ -58,7 +58,7 @@ function git_sparse_clone() {
 # git clone --depth 1 https://github.com/sirpdboy/luci-app-adguardhome temp-adg && mv temp-adg/luci-app-adguardhome package/luci-app-adguardhome && rm -rf temp-adg
 # git clone --depth 1 https://github.com/OneNAS-space/luci-app-adguardhome package/luci-app-adguardhome #仅适配OpenWRT官方源码
 git clone --depth 1 https://github.com/w9315273/luci-app-adguardhome package/luci-app-adguardhome
-# git clone --depth 1 https://github.com/sbwml/luci-app-webdav package/luci-app-webdav
+git clone --depth 1 https://github.com/sbwml/luci-app-webdav package/luci-app-webdav
 #git_sparse_clone main https://github.com/kiddin9/kwrt-packages luci-app-webdav
 #git_sparse_clone main https://github.com/kiddin9/kwrt-packages webdav2
 #git_sparse_clone main https://github.com/kiddin9/kwrt-packages luci-app-gowebdav
