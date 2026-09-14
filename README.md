@@ -16,8 +16,8 @@
 * **./update-amlogic-openwrt.sh xxxxxx.img**
 #
 #### 精简插件截图
-![屏幕截图 2021-07-05 185540](https://user-images.githubusercontent.com/59167936/124461003-b1202580-ddc2-11eb-9495-54eee58eb7f5.jpg)
-![屏幕截图 2021-07-05 185537](https://user-images.githubusercontent.com/59167936/124461013-b4b3ac80-ddc2-11eb-8542-0a68cd292d2b.jpg)
+![屏幕截图 2021-07-05 185540]()
+![屏幕截图 2021-07-05 185537]()
 
 
 # 感谢
